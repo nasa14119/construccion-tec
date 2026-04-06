@@ -4,4 +4,4 @@
 
 ### materia: construcciín de software
 
-Esta es una repa en donde se encuntran todos los proyectos personales desarrollados en la clase
+Esta es una repo en donde se encuntran todos los proyectos personales desarrollados en la clase

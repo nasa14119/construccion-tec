@@ -10,45 +10,75 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="icon"
+      href="assets/favicon.svg"
+      sizes="any"
+      type="image/svg+xml"
+    />
     <title>Cat Cafe</title>
   </head>
-  <body>
-    <div class="main-page">
-      <nav>
-        <span>Home</span>
-        <span>About</span>
-        <span>Location</span>
-      </nav>
-      <main>
-        <aside>
-          <img
-            src="https://images.unsplash.com/photo-1655629831927-aab93514acc6?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
-          />
-        </aside>
-
+  <body class="home-body">
+    <nav class="home-nav">
+      <span>Home</span>
+      <span>Coffee</span>
+      <span>Adopt</span>
+      <span>Location</span>
+    </nav>
+    <main class="home-main">
+      <aside>
         <div class="content">
-          <div>
-            <h1>Bienvenido a nuestro Cat Café</h1>
-            <p>
-              Aquí, el aroma del café recién hecho se mezcla con el suave
-              ronroneo de nuestros adorables felinos. Este es un espacio pensado
-              para relajarte, desconectar del ritmo del día a día y disfrutar de
-              la compañía única de nuestros gatos, cada uno con su propia
-              personalidad.
-            </p>
-            <p>
-              Te invitamos a tomar una bebida deliciosa, leer un buen libro o
-              simplemente dejarte acompañar por estos pequeños amigos peludos.
-            </p>
-            <p>
-              Recuerda respetar su espacio y seguir nuestras normas para que
-              tanto tú como ellos tengan una experiencia agradable.
-            </p>
-            <p>Gracias por visitarnos y disfruta tu experiencia.</p>
+          <img
+            class="img"
+            src="https://images.unsplash.com/photo-1655629831927-aab93514acc6?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="cat-image"
+          />
+          <div class="btn">
+            <span>Buy a coffee</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-coffee-icon lucide-coffee"
+            >
+              <path d="M10 2v2" />
+              <path d="M14 2v2" />
+              <path
+                d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
+              />
+              <path d="M6 2v2" />
+            </svg>
           </div>
         </div>
-      </main>
-    </div>
+      </aside>
+
+      <div class="content">
+        <div>
+          <h1>Bienvenido a nuestro Cat Café</h1>
+          <p>
+            Aquí, el aroma del café recién hecho se mezcla con el suave ronroneo
+            de nuestros adorables felinos. Este es un espacio pensado para
+            relajarte, desconectar del ritmo del día a día y disfrutar de la
+            compañía única de nuestros gatos, cada uno con su propia
+            personalidad.
+          </p>
+          <p>
+            Te invitamos a tomar una bebida deliciosa, leer un buen libro o
+            simplemente dejarte acompañar por estos pequeños amigos peludos.
+          </p>
+          <p>
+            Recuerda respetar su espacio y seguir nuestras normas para que tanto
+            tú como ellos tengan una experiencia agradable.
+          </p>
+          <p>Gracias por visitarnos y disfruta tu experiencia.</p>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

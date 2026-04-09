@@ -19,15 +19,16 @@
       type="image/svg+xml"
     />
     <title>Cat Cafe</title>
+    <script src="js/nav.js" defer></script>
   </head>
   <body class="home-body">
     <nav class="home-nav">
-      <span>Home</span>
-      <span>Coffee</span>
-      <span>Adopt</span>
-      <span>Location</span>
+      <span id="nav-item" data-href="#home">Home</span>
+      <span id="nav-item" data-href="#coffee">Coffee</span>
+      <span id="nav-item" data-href="#adopt">Adopt</span>
+      <span id="nav-item" data-href="#location">Location</span>
     </nav>
-    <main class="home-main">
+    <main class="home-main" id="home">
       <aside>
         <div class="content">
           <img
@@ -82,7 +83,7 @@
         </div>
       </div>
     </main>
-    <section class="coffee">
+    <section class="coffee" id="coffee">
       <header>
         <h2>Coffee</h2>
         <p>
@@ -172,7 +173,7 @@
         </div>
       </main>
     </section>
-    <section class="adopt">
+    <section class="adopt" id="adopt">
       <main>
         <h2>Adopt</h2>
         <div class="content">

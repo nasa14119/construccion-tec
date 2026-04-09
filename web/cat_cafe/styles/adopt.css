@@ -83,15 +83,41 @@ section.adopt .call-action {
     transition-delay: 100ms;
   }
 }
-section.adopt aside:hover .close {
-  transform: translateX(100%);
+@keyframes reveal-adopt-image {
+  from {
+    transform: translateY(-10%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
-section.adopt aside:hover .open {
-  transform: translateX(0);
+section.adopt aside {
+  & {
+    view-timeline-name: --revealing-adopt-image;
+    view-timeline-axis: block;
+    animation-name: reveal-adopt-image;
+    animation-fill-mode: both;
+    animation-timeline: --revealing-adopt-image;
+    animation-range: entry 0% cover 50%;
+  }
+  img {
+    transition: transform ease 250ms;
+  }
 }
-section.adopt aside:hover .call-action {
-  transform: scale(1.01);
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+section.adopt aside:hover {
+  img {
+    transform: scale(1.01);
+  }
+  .close {
+    transform: translateX(100%);
+  }
+  .open {
+    transform: translateX(0);
+  }
+  .call-action {
+    transform: scale(1.1);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
 }
 @media (max-width: 768px) {
   section.adopt aside {

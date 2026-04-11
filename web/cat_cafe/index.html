@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,46 +9,312 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <link rel="stylesheet" href="./styles/global.css" />
+    <link rel="stylesheet" href="styles/coffee.css" />
+    <link rel="stylesheet" href="styles/adopt.css" />
+    <link rel="stylesheet" href="styles/location.css" />
+    <link
+      rel="icon"
+      href="assets/favicon.svg"
+      sizes="any"
+      type="image/svg+xml"
+    />
     <title>Cat Cafe</title>
+    <script src="js/nav.js" defer></script>
+    <script src="js/buycoffe.js" defer></script>
+    <script type="module" src="js/map.js" defer></script>
   </head>
-  <body>
-    <div class="main-page">
-      <nav>
-        <span>Home</span>
-        <span>About</span>
-        <span>Location</span>
-      </nav>
-      <main>
-        <aside>
+  <body class="home-body">
+    <nav class="home-nav">
+      <span id="nav-item" data-href="#home">Home</span>
+      <span id="nav-item" data-href="#coffee">Coffee</span>
+      <span id="nav-item" data-href="#adopt">Adopt</span>
+      <span id="nav-item" data-href="#location">Location</span>
+    </nav>
+    <main class="home-main" id="home">
+      <aside>
+        <div class="content" id="hero-container">
           <img
+            class="img"
             src="https://images.unsplash.com/photo-1655629831927-aab93514acc6?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
+            id="hero-image"
+            alt="cat-image"
           />
-        </aside>
+          <div class="btn" id="buy-coffee">
+            <span>Buy a coffee</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-coffee-icon lucide-coffee"
+            >
+              <path d="M10 2v2" />
+              <path d="M14 2v2" />
+              <path
+                d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"
+              />
+              <path d="M6 2v2" />
+            </svg>
+          </div>
+        </div>
+      </aside>
 
-        <div class="content">
-          <div>
-            <h1>Bienvenido a nuestro Cat Café</h1>
-            <p>
-              Aquí, el aroma del café recién hecho se mezcla con el suave
-              ronroneo de nuestros adorables felinos. Este es un espacio pensado
-              para relajarte, desconectar del ritmo del día a día y disfrutar de
-              la compañía única de nuestros gatos, cada uno con su propia
-              personalidad.
-            </p>
-            <p>
-              Te invitamos a tomar una bebida deliciosa, leer un buen libro o
-              simplemente dejarte acompañar por estos pequeños amigos peludos.
-            </p>
-            <p>
-              Recuerda respetar su espacio y seguir nuestras normas para que
-              tanto tú como ellos tengan una experiencia agradable.
-            </p>
-            <p>Gracias por visitarnos y disfruta tu experiencia.</p>
+      <div class="content">
+        <div>
+          <h1>Welcome to your home</h1>
+          <p>
+            Step into a cozy world where coffee meets purrs, and every visit
+            feels like a warm escape from the everyday rush.
+          </p>
+          <p>
+            Our cat café is a relaxing space to sip your favorite drink while
+            spending time with friendly, playful feline companions.
+          </p>
+          <p>
+            Whether you're here to unwind, work, or simply enjoy the calming
+            presence of cats, you’ll find comfort in every corner.
+          </p>
+          <p>
+            Come for the coffee, stay for the cuddles, and leave with a lighter
+            heart.
+          </p>
+        </div>
+      </div>
+    </main>
+    <section class="coffee" id="coffee">
+      <header>
+        <h2>Coffee</h2>
+        <p>
+          Our coffee is crafted from carefully selected, ethically sourced
+          beans, roasted to bring out a smooth, balanced flavor with notes of
+          chocolate and a hint of caramel. Each cup is brewed fresh to deliver a
+          rich aroma and comforting warmth, making it the perfect companion to a
+          relaxing moment surrounded by our friendly feline guests.
+        </p>
+        <div class="img">
+          <img src="assets/coffebag.png" alt="" />
+        </div>
+      </header>
+      <main>
+        <h2>Menu</h2>
+        <div>
+          <div class="menu-items drinks">
+            <h3>Drinks</h3>
+            <ul>
+              <li>
+                <span>Cappucino</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+              <li>
+                <span>Latte</span>
+                <span class="dots"></span>
+                <em>120</em>
+              </li>
+              <li>
+                <span>Americano</span>
+                <span class="dots"></span>
+                <em>60</em>
+              </li>
+              <li>
+                <span>Machiato</span>
+                <span class="dots"></span>
+                <em>60</em>
+              </li>
+              <li>
+                <span>Macha</span>
+                <span class="dots"></span>
+                <em>60</em>
+              </li>
+              <li>
+                <span>Taro</span>
+                <span class="dots"></span>
+                <em>60</em>
+              </li>
+            </ul>
+          </div>
+          <div class="menu-items pastry">
+            <h3>Pastry</h3>
+            <ul>
+              <li>
+                <span>Croassant</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+              <li>
+                <span>Bannana Bread</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+              <li>
+                <span>Brownies</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+              <li>
+                <span>Cake</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+              <li>
+                <span>Pie</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+              <li>
+                <span>Muffin</span>
+                <span class="dots"></span>
+                <em>130</em>
+              </li>
+            </ul>
           </div>
         </div>
       </main>
-    </div>
+    </section>
+    <section class="adopt" id="adopt">
+      <main>
+        <h2>Adopt</h2>
+        <div class="content">
+          <p>
+            Give a cat a second chance at a loving home and a life full of care.
+            Adoption not only transforms their world, but brings warmth and
+            companionship into yours. Each rescued cat has a unique story and so
+            much love to share. Meet your new best friend today and make a
+            difference that lasts a lifetime.
+          </p>
+        </div>
+      </main>
+      <aside>
+        <img src="assets/adopt-cat.png" alt="" />
+        <div class="call-action">
+          <div class="close">
+            <span>Register</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-notepad-text-icon lucide-notepad-text"
+            >
+              <path d="M8 2v4" />
+              <path d="M12 2v4" />
+              <path d="M16 2v4" />
+              <rect width="16" height="18" x="4" y="4" rx="2" />
+              <path d="M8 10h6" />
+              <path d="M8 14h8" />
+              <path d="M8 18h5" />
+            </svg>
+          </div>
+          <div class="open">
+            <span>Go to form</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-chevrons-right-icon lucide-chevrons-right"
+            >
+              <path d="m6 17 5-5-5-5" />
+              <path d="m13 17 5-5-5-5" />
+            </svg>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <section class="location" id="location">
+      <h2>Location</h2>
+      <div style="position: relative">
+        <div id="map" class="liflet-map"></div>
+        <div class="center-icon" id="center-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-navigation2-icon lucide-navigation-2"
+          >
+            <polygon points="12 2 19 21 12 17 5 21 12 2" />
+          </svg>
+        </div>
+      </div>
+      <div class="content">
+        <p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-map-pin-house-icon lucide-map-pin-house"
+          >
+            <path
+              d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z"
+            />
+            <path
+              d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2"
+            />
+            <path d="M18 22v-3" />
+            <circle cx="10" cy="10" r="3" />
+          </svg>
+          <span class="address">
+            Cat Café “Neko Nook” 3F Neko Heights 2-18-7 Shibuya, Shibuya-ku
+            Tokyo 150-0002 Japan
+          </span>
+        </p>
+      </div>
+    </section>
+    <footer class="home">
+      <div>
+        <span
+          >©
+          <script>
+            document.write(new Date().getFullYear());
+          </script></span
+        >
+      </div>
+      |
+      <span>
+        Desarroollado por:
+        <a href="https://nicolas-amaya.onrender.com" style="color: inherit"
+          >Nicolas Amaya</a
+        >
+      </span>
+    </footer>
   </body>
 </html>

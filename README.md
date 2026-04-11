@@ -2,6 +2,6 @@
 
 ## A01787217
 
-### materia: construcciín de software
+### Course: _Software Construction and Decision Making_
 
-Esta es una repo en donde se encuntran todos los proyectos personales desarrollados en la clase
+This repo is for documenting the projects saw in this class.

@@ -200,3 +200,21 @@ main.home-main {
     column-gap: 1rem;
   }
 }
+footer.home {
+  background: hsl(0, 0%, 90%);
+  color: hsl(0, 0%, 10%);
+  min-height: 10vh;
+  margin-top: -10vh;
+  border-radius: 10rem 10rem 0rem 0px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+  column-gap: 1rem;
+}
+@media (max-width: 768px) {
+  footer.home {
+    margin-top: 0;
+  }
+}

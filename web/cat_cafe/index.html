@@ -9,9 +9,21 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <link rel="stylesheet" href="./styles/global.css" />
     <link rel="stylesheet" href="styles/coffee.css" />
     <link rel="stylesheet" href="styles/adopt.css" />
+    <link rel="stylesheet" href="styles/location.css" />
     <link
       rel="icon"
       href="assets/favicon.svg"
@@ -20,6 +32,8 @@
     />
     <title>Cat Cafe</title>
     <script src="js/nav.js" defer></script>
+    <script src="js/buycoffe.js" defer></script>
+    <script type="module" src="js/map.js" defer></script>
   </head>
   <body class="home-body">
     <nav class="home-nav">
@@ -30,13 +44,14 @@
     </nav>
     <main class="home-main" id="home">
       <aside>
-        <div class="content">
+        <div class="content" id="hero-container">
           <img
             class="img"
             src="https://images.unsplash.com/photo-1655629831927-aab93514acc6?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            id="hero-image"
             alt="cat-image"
           />
-          <div class="btn">
+          <div class="btn" id="buy-coffee">
             <span>Buy a coffee</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -233,5 +248,73 @@
         </div>
       </aside>
     </section>
+    <section class="location" id="location">
+      <h2>Location</h2>
+      <div style="position: relative">
+        <div id="map" class="liflet-map"></div>
+        <div class="center-icon" id="center-btn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-navigation2-icon lucide-navigation-2"
+          >
+            <polygon points="12 2 19 21 12 17 5 21 12 2" />
+          </svg>
+        </div>
+      </div>
+      <div class="content">
+        <p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-map-pin-house-icon lucide-map-pin-house"
+          >
+            <path
+              d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z"
+            />
+            <path
+              d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2"
+            />
+            <path d="M18 22v-3" />
+            <circle cx="10" cy="10" r="3" />
+          </svg>
+          <span class="address">
+            Cat Café “Neko Nook” 3F Neko Heights 2-18-7 Shibuya, Shibuya-ku
+            Tokyo 150-0002 Japan
+          </span>
+        </p>
+      </div>
+    </section>
+    <footer class="home">
+      <div>
+        <span
+          >©
+          <script>
+            document.write(new Date().getFullYear());
+          </script></span
+        >
+      </div>
+      |
+      <span>
+        Desarroollado por:
+        <a href="https://nicolas-amaya.onrender.com" style="color: inherit"
+          >Nicolas Amaya</a
+        >
+      </span>
+    </footer>
   </body>
 </html>

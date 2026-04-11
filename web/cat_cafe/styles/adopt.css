@@ -1,6 +1,7 @@
 section.adopt {
   min-height: 30vh;
   width: 100%;
+  padding-block: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,6 +9,8 @@ section.adopt {
 @media (max-width: 768px) {
   section.adopt {
     flex-direction: column-reverse;
+    padding-block: 15vh 0;
+    margin-bottom: 0;
   }
 }
 section.adopt aside {
@@ -85,7 +88,7 @@ section.adopt .call-action {
 }
 @keyframes reveal-adopt-image {
   from {
-    transform: translateY(-10%);
+    transform: translateY(-10vh);
   }
   to {
     transform: translateY(0);

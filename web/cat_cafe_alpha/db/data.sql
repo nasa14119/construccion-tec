@@ -1,0 +1,32 @@
+INSERT INTO categories (product_name, image_url, day, category)
+VALUES 
+("Strawberry Shortcake","https://plus.unsplash.com/premium_photo-1669680785708-2c756ee97de8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Monday","food"),
+("Vanilla Cake Slice","https://images.unsplash.com/photo-1654546518361-eef83e447521?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Monday","food"),
+("Banana Bread","https://images.unsplash.com/photo-1621955629759-5a2d9f99c4e7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Tuesday","food"),
+("Pumpkin spice bread","https://images.unsplash.com/photo-1696177723470-5063e94f555f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFB1bXBraW4lMjBzcGljZSUyMGJyZWFkfGVufDB8fDB8fHww","Tuesday","food"),
+("Pain au chocolat","https://images.unsplash.com/photo-1681218424681-b4f8228ecea9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFpbiUyMGF1JTIwY2hvY29sYXR8ZW58MHx8MHx8fDA%3D","Wednesday","food"),
+("Croissant","https://images.unsplash.com/photo-1618667060775-1fe102237f94?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Wednasday","food"),
+("Chocolate chip cookie","https://images.unsplash.com/photo-1625876981820-be17a6807189?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Thursday","food"),
+("Peanut butter filled cookie","https://images.unsplash.com/photo-1511730609347-730e2da3da59?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Thursday","food"),
+("Vanilla cat muffin","https://images.unsplash.com/photo-1630463640302-2f92b4e771aa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q2F0JTIwc2hhcGVkJTIwdmFuaWxsYSUyMG11ZmZpbnxlbnwwfHwwfHx8MA%3D%3D","Friday","food"),
+("Cat shaped bread","https://images.unsplash.com/photo-1723670197205-0be5900cb681?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fENhdCUyMHNoYXBlZCUyMGNob2NvbGF0ZSUyMG11ZmZpbnxlbnwwfHwwfHx8MA%3D%3D","Friday","food"),
+("Brownie","https://images.unsplash.com/photo-1636743715220-d8f8dd900b87?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QnJvd25pZXxlbnwwfHwwfHx8MA%3D%3D","Saturday","food"),
+("Varied mini cookies","https://images.unsplash.com/photo-1767166877146-8c791cb65e08?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8TWluaSUyMGNvb2tpZXN8ZW58MHx8MHx8fDA%3D","Saturday","food"),
+("Freshly baked bread","https://plus.unsplash.com/premium_photo-1700412978009-52c0f3a4bf93?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8RnJlc2hseSUyMGJha2VkJTIwYnJlYWR8ZW58MHx8MHx8fDA%3D","Sunday","food"),
+("Freshly baked sourdough bread","https://images.unsplash.com/photo-1770672438590-413eae05e595?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8RnJlc2hseSUyMGJha2VkJTIwc291cmRvdWdoJTIwYnJlYWR8ZW58MHx8MHx8fDA%3D","Sunday","food"),
+("Matcha latte","https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TWF0Y2hhJTIwbGF0dGV8ZW58MHx8MHx8fDA%3D","Monday","drinks"),
+("Latte","https://images.unsplash.com/photo-1593443320739-77f74939d0da?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","Monday","drinks"),
+("Hot chocolate","https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90JTIwY2hvY29sYXRlfGVufDB8fDB8fHww","Tuesday","drinks"),
+("Vanilla Shake","https://images.unsplash.com/photo-1629386133133-5e639cf8d388?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFZhbmlsbGElMjBzaGFrZXxlbnwwfHwwfHx8MA%3D%3D","Tuesday","drinks"),
+("French Press Coffee","https://images.unsplash.com/photo-1536232059214-d1da6aae256e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJlbmNoJTIwcHJlc3MlMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D","Wednesday","drinks"),
+("Espresso","https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZXNwcmVzc298ZW58MHx8MHx8fDA%3D","Wednesday","drinks"),
+("Hot Chocolate w/marshmellows","https://images.unsplash.com/photo-1607196707151-2db8b71294ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90JTIwY2hvY29sYXRlfGVufDB8fDB8fHww","Thursday","drinks"),
+("Hot Vanilla Shake","https://images.unsplash.com/photo-1665658581674-c4b3cf6f230c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8SG90JTIwdmFuaWxsYSUyMHNoYWtlfGVufDB8fDB8fHww","Thursday","drinks"),
+("Cat special Drink","https://images.unsplash.com/photo-1744390708895-b1fdec0eb37c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Q2F0JTIwc2hhcGVkJTIwdmFuaWxsYSUyMG11ZmZpbnxlbnwwfHwwfHx8MA%3D%3D","Friday","drinks"),
+("Mystery cat drink","https://images.unsplash.com/photo-1680891559139-f5b8a6ab70c8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fE15c3RlcmlvdXMlMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D","Friday","drinks"),
+("Decaf","https://images.unsplash.com/photo-1719488757646-6c214c8315b6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fERlY2FmfGVufDB8fDB8fHww","Saturday","drinks"),
+("Italian Black Coffee","https://images.unsplash.com/photo-1648759312827-783d2a3abc72?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXRhbGlhbiUyMGJsYWNrJTIwY29mZmV8ZW58MHx8MHx8fDA%3D","Saturday","drinks"),
+("Large Black coffe","https://images.unsplash.com/photo-1549063729-f02aba455bda?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFyZ2UlMjBibGFjayUyMGNvZmZlfGVufDB8fDB8fHww","Sunday","drinks"),
+("Special Italian Coffe","https://images.unsplash.com/photo-1594389006088-f4828a09373d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aXRhbGlhbiUyMGNvZmZlfGVufDB8fDB8fHww","Sunday","drinks");
+
+

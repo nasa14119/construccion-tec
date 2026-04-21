@@ -1,0 +1,235 @@
+.adopt-content {
+  min-height: 30vh;
+  width: 100%;
+  padding-block: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .adopt-content {
+    flex-direction: column-reverse;
+    padding-block: 10vh 0;
+    margin-bottom: 0;
+  }
+}
+.adopt-content aside {
+  & {
+    cursor: pointer;
+    position: relative;
+    margin-block: 1rem;
+    height: 40vh;
+    column-gap: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  img {
+    height: 100%;
+    aspect-ratio: 16 / 14;
+    object-position: top;
+    object-fit: cover;
+    border-radius: 2rem;
+  }
+}
+.adopt-content main {
+  & > *,
+  p {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  h2 {
+    font-size: 46px;
+  }
+  .content {
+    max-width: 60ch;
+  }
+}
+.adopt-content .call-action {
+  & {
+    position: absolute;
+    bottom: 1rem;
+    height: 50px;
+    right: 10px;
+    backdrop-filter: blur(10px);
+    font-size: 24px;
+    color: var(--background);
+    border: 2px solid var(--background);
+    border-radius: 9999px;
+    width: 15vw;
+    max-width: 100%;
+    overflow: hidden;
+    transition: transform ease 100ms;
+  }
+  & > * {
+    position: absolute;
+    inset: 0;
+  }
+  .close,
+  .open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+    transition: transform ease-in 250ms;
+  }
+  .close svg,
+  .open svg {
+    width: 30px;
+    height: 30px;
+  }
+  .open {
+    transform: translateX(-100%);
+    column-gap: 5px;
+    transition-timing-function: ease;
+    transition-delay: 100ms;
+  }
+}
+@keyframes reveal-adopt-image {
+  from {
+    transform: translateY(-10vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.adopt-content aside {
+  & {
+    view-timeline-name: --revealing-adopt-image;
+    view-timeline-axis: block;
+    animation-name: reveal-adopt-image;
+    animation-fill-mode: both;
+    animation-timeline: --revealing-adopt-image;
+    animation-range: entry 0% cover 50%;
+  }
+  img {
+    transition: transform ease 250ms;
+  }
+}
+.adopt-content aside:hover {
+  img {
+    transform: scale(1.01);
+  }
+  .close {
+    transform: translateX(100%);
+  }
+  .open {
+    transform: translateX(0);
+  }
+  .call-action {
+    transform: scale(1.1);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+}
+@media (max-width: 768px) {
+  .adopt-content aside {
+    padding-inline: 2rem;
+  }
+  .adopt-content main {
+    & {
+      padding-inline: 2rem;
+    }
+    p {
+      width: 100%;
+    }
+  }
+  .adopt-content .call-action {
+    & {
+      width: fit-content;
+      font-size: 24px;
+      padding-inline: 1rem;
+      display: flex;
+      justify-content: center;
+      right: 20%;
+    }
+    .open {
+      display: none;
+    }
+    .close {
+      position: relative;
+      inset: unset;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .adopt-content aside:hover .close {
+    transform: translateX(0);
+  }
+}
+.header-adopt {
+  padding-block: 10vh 2rem;
+}
+.header-adopt h2 {
+  margin: 0;
+  padding-inline: 5%;
+  padding-bottom: 5rem;
+  font-size: 52px;
+  font-weight: 700;
+  max-width: 2048px;
+  margin-inline: auto;
+}
+.header-adopt .cat-gallery {
+  padding-block: 20px 5rem;
+  padding-inline: 2rem;
+  max-width: 100vw;
+  overflow-x: scroll;
+  display: flex;
+  justify-content: center;
+  column-gap: 2rem;
+}
+@media (max-width: 768px) {
+  .header-adopt .cat-gallery {
+    padding-inline: 2rem;
+    justify-content: flex-start;
+  }
+}
+.cat-gallery .cat-item {
+  & {
+    border: 1px solid #00000010;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    flex: 0 0 auto;
+    overflow-x: scroll;
+    border-radius: 3rem;
+    min-height: 27vh;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    position: relative;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+  }
+}
+.cat-gallery .cat-info {
+  transition: transform ease-out 500ms;
+  transform: translateY(100%);
+  background-color: #00000050;
+  padding: 5% 10%;
+  color: whitesmoke;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.cat-gallery .cat-info > * {
+  width: 100%;
+  text-align: left;
+}
+.cat-info .cat-title {
+  font-weight: 500;
+  font-size: 24px;
+}
+.cat-item:hover .cat-info {
+  transform: translateY(0);
+}
+@media (max-width: 768px) {
+  .cat-item .cat-info {
+    transform: translateY(0);
+  }
+}

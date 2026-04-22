@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Prloaders -->
+    <link
+      rel="preload"
+      href="assets/pizzas_imgs/pizza_1.png"
+      as="image"
+      type="image/png"
+    />
+    <link
+      rel="preload"
+      href="assets/pizzas_imgs/pizza_2.png"
+      as="image"
+      type="image/png"
+    />
+    <link
+      rel="preload"
+      href="assets/pizzas_imgs/pizza_3.png"
+      as="image"
+      type="image/png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/hero.css" />
+    <link rel="stylesheet" href="styles/location.css" />
+    <script src="scripts/parallax.js" defer></script>
+    <script src="scripts/animationPizza.js" defer></script>
+    <script src="scripts/map.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="hero-container">
+      <nav
+        class="fixed backdrop-blur-sm h-fit inset-x-0 flex items-center font-bold text-xl p-2 text-white gap-x-10 nav-text"
+      >
+        <img
+          src="assets/logo.png"
+          alt=""
+          class="w-[10vw] aspect-video object-contain logo"
+        />
+        <div>
+          <a href="#">Home</a>
+          <a href="#menu">Menu</a>
+          <a href="#info">Info</a>
+        </div>
+      </nav>
+      <main
+        class="max-h-full overflow-hidden -z-40 relative flex justify-center items-center"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1770827401447-3396e55dbc8f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          id="parallax-hero"
+          class="absolute inset-0 -z-50"
+          alt=""
+        />
+        <span class="text-[10vh] italic neonText">Pizza</span>
+      </main>
+      <h2
+        class="h-full font-semibold italic px-[10%] pt-20 text-[20vh] flex items-center"
+        id="menu"
+      >
+        Menu
+      </h2>
+    </header>
+    <main class="flex justify-center items-center flex-col">
+      <div
+        class="w-3/5 aspect-video bg-amber-900/40 rounded-3xl grid grid-cols-2"
+      >
+        <div class="flex flex-col justify-center px-[5%]">
+          <div>
+            <h2 class="text-3xl font-bold italic capitalize">
+              Nuestras Consentidas
+            </h2>
+            <hr class="border-dashed" />
+          </div>
+          <template id="template-pizza-item">
+            <li
+              id="pizza-item"
+              class="pizza-item flex flex-col hover:bg-amber-900/60 p-1 rounded-sm cursor-default"
+            >
+              <span class="title text-2xl font-medium"></span>
+              <span class="desc text-xs pl-2"></span>
+            </li>
+          </template>
+          <ul id="pizza-items" class="py-2 gap-y-5 flex flex-col"></ul>
+        </div>
+        <aside class="relative size-full">
+          <img alt="" id="pizza-in" class="absolute -translate-y-1/2 top-1/2" />
+          <img
+            class="absolute -translate-y-1/2 top-1/2"
+            id="pizza-out"
+            alt=""
+          />
+        </aside>
+      </div>
+      <div class="pt-5 grid grid-cols-2 w-[80%] mx-auto justify-between">
+        <div>
+          <h3 class="text-4xl font-semibold italic">Esentials</h3>
+          <ul class="px-[10%]">
+            <li class="menu-item">
+              <span class="font-medium">Margarita</span>
+              <span class="dots"></span>
+              <span class="font-light">220</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Pepperoni</span>
+              <span class="dots"></span>
+              <span class="font-light">250</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Cuatro Quesos</span>
+              <span class="dots"></span>
+              <span class="font-light">270</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Hawaiana</span>
+              <span class="dots"></span>
+              <span class="font-light">260</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Napolitana</span>
+              <span class="dots"></span>
+              <span class="font-light">240</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-4xl font-medium italic">Clasics</h3>
+          <ul class="px-[10%]">
+            <li class="menu-item">
+              <span class="font-medium">Mexicana</span>
+              <span class="dots"></span>
+              <span class="font-light">280</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">BBQ Chicken</span>
+              <span class="dots"></span>
+              <span class="font-light">290</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Vegetariana</span>
+              <span class="dots"></span>
+              <span class="font-light">260</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Diavola</span>
+              <span class="dots"></span>
+              <span class="font-light">275</span>
+            </li>
+            <li class="menu-item">
+              <span class="font-medium">Prosciutto</span>
+              <span class="dots"></span>
+              <span class="font-light">300</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <section class="mt-[10vh] bg-rose-700 pb-10" id="info">
+      <h2 class="text-right px-[10%] text-[18vh] text-rose-200">Información</h2>
+      <section class="location" id="location">
+        <div class="relative">
+          <div id="map" class="liflet-map"></div>
+          <div class="center-icon" id="center-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-navigation2-icon lucide-navigation-2"
+            >
+              <polygon points="12 2 19 21 12 17 5 21 12 2" />
+            </svg>
+          </div>
+        </div>
+        <div class="content">
+          <div class="flex items-center justify-center text-white min-w-fit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-map-pin-house-icon lucide-map-pin-house size-7"
+            >
+              <path
+                d="M15 22a1 1 0 0 1-1-1v-4a1 1 0 0 1 .445-.832l3-2a1 1 0 0 1 1.11 0l3 2A1 1 0 0 1 22 17v4a1 1 0 0 1-1 1z"
+              />
+              <path
+                d="M18 10a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 .601.2"
+              />
+              <path d="M18 22v-3" />
+              <circle cx="10" cy="10" r="3" />
+            </svg>
+            <span class="address text-rose-200 italic max-w-[35ch]">
+              1600 Amphitheatre Parkway, Mountain View, CA, USA
+            </span>
+          </div>
+          <div
+            class="rounded-full p-5 ml-auto bg-[#0035C7] group overflow-hidden relative w-[40vw]"
+          >
+            <div
+              class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-10 hidden group-hover:block"
+            >
+              <div
+                class="absolute motocycle flex items-center uppercase text-white justify-end"
+              >
+                <div class="flex gap-x-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-pizza-icon lucide-pizza text-rose-200 rotate-12"
+                  >
+                    <path d="m12 14-1 1" />
+                    <path d="m13.75 18.25-1.25 1.42" />
+                    <path d="M17.775 5.654a15.68 15.68 0 0 0-12.121 12.12" />
+                    <path d="M18.8 9.3a1 1 0 0 0 2.1 7.7" />
+                    <path
+                      d="M21.964 20.732a1 1 0 0 1-1.232 1.232l-18-5a1 1 0 0 1-.695-1.232A19.68 19.68 0 0 1 15.732 2.037a1 1 0 0 1 1.232.695z"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-pizza-icon lucide-pizza text-rose-200 rotate-12"
+                  >
+                    <path d="m12 14-1 1" />
+                    <path d="m13.75 18.25-1.25 1.42" />
+                    <path d="M17.775 5.654a15.68 15.68 0 0 0-12.121 12.12" />
+                    <path d="M18.8 9.3a1 1 0 0 0 2.1 7.7" />
+                    <path
+                      d="M21.964 20.732a1 1 0 0 1-1.232 1.232l-18-5a1 1 0 0 1-.695-1.232A19.68 19.68 0 0 1 15.732 2.037a1 1 0 0 1 1.232.695z"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-pizza-icon lucide-pizza text-rose-200 rotate-12"
+                  >
+                    <path d="m12 14-1 1" />
+                    <path d="m13.75 18.25-1.25 1.42" />
+                    <path d="M17.775 5.654a15.68 15.68 0 0 0-12.121 12.12" />
+                    <path d="M18.8 9.3a1 1 0 0 0 2.1 7.7" />
+                    <path
+                      d="M21.964 20.732a1 1 0 0 1-1.232 1.232l-18-5a1 1 0 0 1-.695-1.232A19.68 19.68 0 0 1 15.732 2.037a1 1 0 0 1 1.232.695z"
+                    />
+                  </svg>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-motorbike-icon lucide-motorbike size-10"
+                >
+                  <path d="m18 14-1-3" />
+                  <path d="m3 9 6 2a2 2 0 0 1 2-2h2a2 2 0 0 1 1.99 1.81" />
+                  <path
+                    d="M8 17h3a1 1 0 0 0 1-1 6 6 0 0 1 6-6 1 1 0 0 0 1-1v-.75A5 5 0 0 0 17 5"
+                  />
+                  <circle cx="19" cy="17" r="3" />
+                  <circle cx="5" cy="17" r="3" />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="size-full flex justify-center items-center gap-x-2 text-white group-hover:translate-x-full transition-transform"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-phone-icon lucide-phone"
+              >
+                <path
+                  d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"
+                />
+              </svg>
+              <span>Domicilios</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </body>
+</html>

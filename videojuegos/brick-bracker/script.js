@@ -2,7 +2,7 @@ import Rect from "./libs/Rect.js";
 import Vector from "./libs/Vector.js";
 import GameObject from "./libs/GameObject.js";
 import TextLabel from "./libs/TextLabel.js";
-import { boxOverlap } from "./libs/game_functions.js";
+import { boxOverlap, playSoundEffect } from "./libs/game_functions.js";
 /** @type {HTMLCanvasElement} */
 const canva = document.querySelector("#canva");
 const canvaWidth = canva.width;
@@ -20,6 +20,7 @@ const paddleSpeed = 5;
 const ballInitialVelocity = 3;
 const MAX_HEIGHT = 300;
 const COLORS = ["#e63946", "#f1faee", "#a8dadc", "#457b9d", "#1d3557"];
+const maxLevel = 3;
 const keyDirections = {
   a: "left",
   d: "right",
@@ -273,7 +274,7 @@ class Game {
     this.bricks = [];
     this.bricksCount = 0;
     let yStart = 50;
-    COLORS.toSpliced(3, 3 - this.level).forEach((color) => {
+    COLORS.toSpliced(3, maxLevel - this.level).forEach((color) => {
       for (let i = 50; i < canvaWidth - 50; i = i + 70) {
         this.bricks.push(new Brick({ x: i, y: yStart }, color));
         this.bricksCount++;
@@ -310,12 +311,16 @@ class Game {
     this.bricks.forEach((brick) => brick.draw(deltaTime));
   }
   end() {
-    if (this.level > 3) this.isWin = true;
+    if (this.level > maxLevel) {
+      this.isWin = true;
+    }
     this.ball.setAnimation("winner");
     this.pause();
   }
   update() {
-    if (this.bricksCount === 0) this.end();
+    if (this.bricksCount === 0) {
+      this.end();
+    }
     ctx.clearRect(0, 0, canvaWidth, canvasHeight);
     this.actors.forEach((actor) => actor.update(deltaTime));
     if (
@@ -333,7 +338,10 @@ class Game {
       this.ball.velocity.x *= -1;
     }
     if (boxOverlap(this.ball, this.downWall)) {
-      if (!this.paused) this.lives.pop();
+      if (!this.paused) {
+        this.lives.pop();
+        this.lives.length > 0 && playSoundEffect("./downEffect.mp3", true);
+      }
       this.pause();
       this.ball.setAnimation("lose");
     }
@@ -346,20 +354,27 @@ class Game {
     });
     if (filterval !== null) this.bricks = this.bricks.toSpliced(filterval, 1);
     if (this.bricksCount !== this.bricks.length) {
-      const soundEffect = new Audio();
-      soundEffect.src = "./soundEffect.mp3";
-      soundEffect.addEventListener("loadedmetadata", () => soundEffect.play());
+      playSoundEffect("./soundEffect.mp3");
     }
     this.bricksCount = this.bricks.length;
     if (this.bricksCount === 0 && !this.paused) {
       this.level++;
+      !this.paused &&
+        this.level > maxLevel &&
+        playSoundEffect("./winEffect.mp3", true);
+      if (!this.paused && this.level < maxLevel) {
+        playSoundEffect("./upEffect.mp3", true);
+      }
       this.pause();
     }
-    this.draw();
+    if (!this.isOver && this.lives.length === 0) {
+      playSoundEffect("./loseEffect.mp3", true);
+    }
     if (this.lives.length === 0) {
       this.isOver = true;
       this.pause();
     }
+    this.draw();
   }
   // Add the key pressed to the 'keys' array of the object sent
   addKey(direction, object) {

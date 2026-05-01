@@ -34,6 +34,15 @@ export function boxOverlap(obj1, obj2) {
   // TODO: use the correct condition
   return L1 <= R2 && L2 <= R1 && T1 <= B2 && T2 <= B1;
 }
+export function playSoundEffect(path, sileceAll = false) {
+  const soundEffect = new Audio();
+  if (sileceAll && !audio.paused) {
+    soundEffect.addEventListener("ended", () => audio.play());
+    audio.pause();
+  }
+  soundEffect.src = path;
+  soundEffect.addEventListener("loadedmetadata", () => soundEffect.play());
+}
 
 /*
  * Generate a random integer in the range [start, start + size - 1]

@@ -1,6 +1,7 @@
 import Rect from "./libs/Rect.js";
 import Vector from "./libs/Vector.js";
 import GameObject from "./libs/GameObject.js";
+import TextLabel from "./libs/TextLabel.js";
 import { boxOverlap } from "./libs/game_functions.js";
 /** @type {HTMLCanvasElement} */
 const canva = document.querySelector("#canva");
@@ -16,7 +17,7 @@ const maxcol = 21;
 const spritePath = "./MarioSprite.png";
 const spritePathInverted = "./MarioSpriteInverted.png";
 const paddleSpeed = 5;
-const ballInitialVelocity = 1;
+const ballInitialVelocity = 3;
 const MAX_HEIGHT = 300;
 const COLORS = ["#e63946", "#f1faee", "#a8dadc", "#457b9d", "#1d3557"];
 const keyDirections = {
@@ -90,9 +91,12 @@ class Ball extends GameObject {
     super.draw(ctx);
   }
   serve() {
-    this.setAnimation("idle");
-    let angle = (Math.random() * Math.PI * 3) / 4 - Math.PI / 4;
-    this.velocity = new Vector(Math.cos(angle), Math.sin(angle) * -1);
+    this.ballSpeed = ballInitialVelocity;
+    let min = (50 * Math.PI) / 180;
+    let max = (140 * Math.PI) / 180;
+    let angle = Math.random() * (max - min) + min;
+    this.velocity = new Vector(Math.cos(angle), -Math.sin(angle));
+    this._position = new Vector(0, 0);
     this.position = new Vector(canvaWidth / 2, canvasHeight - 145);
   }
   set position(vec) {
@@ -190,10 +194,64 @@ class Paddle extends GameObject {
     }
   }
 }
+class Heart extends GameObject {
+  constructor(x, y) {
+    super(new Vector(x, y), 20, 20);
+    this.position = new Vector(x, y);
+    this.setSprite("./heart.png", new Rect(0, 0, 677, 677));
+  }
+  draw() {
+    super.draw(ctx);
+  }
+}
+class GameOverText extends TextLabel {
+  constructor(text, padding = 0) {
+    super(
+      canvaWidth / 2 - 100,
+      canvasHeight / 2 + padding,
+      '40px "Pixelify Sans"',
+      "#fff",
+      text,
+    );
+  }
+  draw() {
+    super.draw(ctx);
+  }
+}
+class BlackScreen extends GameObject {
+  constructor() {
+    super(
+      new Vector(canvaWidth / 2, canvasHeight / 2),
+      canvaWidth,
+      canvasHeight,
+      "#000",
+    );
+  }
+  draw() {
+    super.draw(ctx);
+  }
+}
 class Game {
   constructor() {
     this.padle = new Paddle();
-    this.paused = false;
+    this.paused = true;
+    this.level = 1;
+    this.isOver = false;
+    this.isWin = false;
+    this.resetLives();
+    this.loseObjects = [
+      new BlackScreen(),
+      new GameOverText("GAME OVER"),
+      new GameOverText("PRESS [r]", 50),
+    ];
+    this.winBall = new Ball(canvaWidth / 2 - 10, canvasHeight / 2, 30, 30);
+    this.winBall.setAnimation("winner");
+    this.winObjects = [
+      new BlackScreen(),
+      this.winBall,
+      new GameOverText("YOU WIN!!", 50),
+      new GameOverText("PRESS [r]", 100),
+    ];
     this.downWall = new Wall(
       new Vector(canvaWidth / 2, canvasHeight - 80),
       canvaWidth,
@@ -205,62 +263,59 @@ class Game {
       canvasHeight,
     );
     this.leftWall = new Wall(new Vector(2, canvasHeight / 2), 10, canvasHeight);
-    this.topWall = new Wall(
-      new Vector(canvaWidth - 1, canvasHeight / 2),
-      10,
-      canvasHeight,
-    );
-    this.topWall = new Wall(new Vector(canvaWidth / 2, 0), canvaWidth, 20);
+    this.topWall = new Wall(new Vector(canvaWidth / 2, 0), canvaWidth, 10);
     this.ball = new Ball(canvaWidth / 2, canvasHeight - 145, 30, 30);
-    this.reset();
     this.actors = [];
     this.actors.push(this.padle, this.ball);
     this.setBricks();
   }
   setBricks() {
     this.bricks = [];
-    this.bricksConut = 0;
+    this.bricksCount = 0;
     let yStart = 50;
-    COLORS.forEach((color) => {
+    COLORS.toSpliced(3, 3 - this.level).forEach((color) => {
       for (let i = 50; i < canvaWidth - 50; i = i + 70) {
         this.bricks.push(new Brick({ x: i, y: yStart }, color));
-        this.bricksConut++;
+        this.bricksCount++;
       }
       yStart += 40;
     });
   }
-  reset() {
-    window.addEventListener(
-      "keydown",
-      (event) => {
-        this.ball.ballSpeed = ballInitialVelocity;
-        this.ball.serve();
-        this.padle.position = new Vector(canvaWidth / 2, canvasHeight - 120);
-        this.ball.setAnimation("idle");
-        this.paused = false;
-        this.setBricks();
-      },
-      { once: true },
-    );
+  resetLives() {
+    this.lives = [
+      new Heart(canvaWidth - 10, canvasHeight - 20),
+      new Heart(canvaWidth - 35, canvasHeight - 20),
+      new Heart(canvaWidth - 60, canvasHeight - 20),
+    ];
   }
   pause() {
     this.paused = true;
     this.ball.velocity = new Vector(0, 0);
     this.padle.velocity = new Vector(0, 0);
+    this.ball.ballSpeed = 0;
     this.delKey("left", this.padle);
     this.delKey("right", this.padle);
-    this.reset();
   }
   draw(deltaTime) {
+    if (this.isOver) {
+      this.loseObjects.forEach((item) => item.draw(deltaTime));
+      return;
+    }
+    if (this.isWin) {
+      this.winObjects.forEach((item) => item.draw(deltaTime));
+      return;
+    }
+    this.lives.forEach((heart) => heart.draw(deltaTime));
     this.actors.forEach((actor) => actor.draw(deltaTime));
     this.bricks.forEach((brick) => brick.draw(deltaTime));
   }
   end() {
+    if (this.level > 3) this.isWin = true;
     this.ball.setAnimation("winner");
     this.pause();
   }
   update() {
-    if (this.bricksConut === 0) this.end();
+    if (this.bricksCount === 0) this.end();
     ctx.clearRect(0, 0, canvaWidth, canvasHeight);
     this.actors.forEach((actor) => actor.update(deltaTime));
     if (
@@ -278,6 +333,7 @@ class Game {
       this.ball.velocity.x *= -1;
     }
     if (boxOverlap(this.ball, this.downWall)) {
+      if (!this.paused) this.lives.pop();
       this.pause();
       this.ball.setAnimation("lose");
     }
@@ -289,13 +345,21 @@ class Game {
       }
     });
     if (filterval !== null) this.bricks = this.bricks.toSpliced(filterval, 1);
-    if (this.bricksConut !== this.bricks.length) {
+    if (this.bricksCount !== this.bricks.length) {
       const soundEffect = new Audio();
       soundEffect.src = "./soundEffect.mp3";
       soundEffect.addEventListener("loadedmetadata", () => soundEffect.play());
     }
-    this.bricksConut = this.bricks.length;
+    this.bricksCount = this.bricks.length;
+    if (this.bricksCount === 0 && !this.paused) {
+      this.level++;
+      this.pause();
+    }
     this.draw();
+    if (this.lives.length === 0) {
+      this.isOver = true;
+      this.pause();
+    }
   }
   // Add the key pressed to the 'keys' array of the object sent
   addKey(direction, object) {
@@ -313,7 +377,7 @@ class Game {
   }
   createEventListeners() {
     window.addEventListener("keydown", (event) => {
-      if (this.paused) return;
+      if (this.paused || this.bricks.length <= 0) return;
       // Detect the predefined keys for movement and store the direction
       if (event.key in keyDirections) {
         this.addKey(keyDirections[event.key], this.padle);
@@ -321,11 +385,28 @@ class Game {
     });
 
     window.addEventListener("keyup", (event) => {
-      if (this.paused) return;
+      if (this.paused || this.bricks.length <= 0) return;
       // Detect the predefined keys for movement and remove the direction
       if (event.key in keyDirections) {
         this.delKey(keyDirections[event.key], this.padle);
       }
+    });
+    window.addEventListener("keydown", (e) => {
+      if (!this.isOver && !this.isWin) return;
+      if (e.key === "r") {
+        this.resetLives();
+        this.level = 1;
+        this.isOver = false;
+        this.isWin = false;
+      }
+    });
+    window.addEventListener("keyup", (event) => {
+      if (!this.paused) return;
+      this.setBricks();
+      this.ball.setAnimation("idle");
+      this.padle.position = new Vector(canvaWidth / 2, canvasHeight - 120);
+      this.paused = false;
+      this.ball.serve();
     });
   }
 }

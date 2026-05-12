@@ -27,6 +27,21 @@ const keyDirections = {
   ArrowLeft: "left",
   ArrowRight: "right",
 };
+class Mushroom extends GameObject {
+  constructor() {
+    super(new Vector(Math.floor(Math.random() * canvaWidth), 0), 30, 30);
+    this.width = 30;
+    this.height = 30;
+    this.setSprite("./mushroom.png", new Rect(0, 0, 640, 640));
+  }
+  update(deltaTime) {
+    this.position.y += 1;
+    this.updateCollider();
+  }
+  draw() {
+    super.draw(ctx);
+  }
+}
 class Brick extends GameObject {
   constructor({ x, y }, color) {
     super(new Vector(x, y), 50, 20, color);
@@ -267,7 +282,17 @@ class Game {
     this.topWall = new Wall(new Vector(canvaWidth / 2, 0), canvaWidth, 10);
     this.ball = new Ball(canvaWidth / 2, canvasHeight - 145, 30, 30);
     this.actors = [];
+    this.mushrroms = [];
     this.actors.push(this.padle, this.ball);
+    let start = false;
+    setInterval(() => {
+      if (!start) {
+        start = true;
+        return;
+      }
+      if (this.paused || this.lives.length >= 6) return;
+      this.mushrroms.push(new Mushroom());
+    }, 25 * 1000);
     this.setBricks();
   }
   setBricks() {
@@ -291,6 +316,7 @@ class Game {
   }
   pause() {
     this.paused = true;
+    this.mushrroms = [];
     this.ball.velocity = new Vector(0, 0);
     this.padle.velocity = new Vector(0, 0);
     this.ball.ballSpeed = 0;
@@ -307,8 +333,9 @@ class Game {
       return;
     }
     this.lives.forEach((heart) => heart.draw(deltaTime));
-    this.actors.forEach((actor) => actor.draw(deltaTime));
     this.bricks.forEach((brick) => brick.draw(deltaTime));
+    this.mushrroms.forEach((mushrrom) => mushrrom.draw(deltaTime));
+    this.actors.forEach((actor) => actor.draw(deltaTime));
   }
   end() {
     if (this.level > maxLevel) {
@@ -323,6 +350,7 @@ class Game {
     }
     ctx.clearRect(0, 0, canvaWidth, canvasHeight);
     this.actors.forEach((actor) => actor.update(deltaTime));
+    this.mushrroms.forEach((mushrrom) => mushrrom.update(deltaTime));
     if (
       boxOverlap(this.ball, this.padle) ||
       boxOverlap(this.ball, this.topWall)
@@ -330,6 +358,18 @@ class Game {
       this.ball.velocity.y *= -1;
       this.ball.increaseSpeed();
     }
+    this.mushrroms.forEach((mushroom, i) => {
+      if (boxOverlap(this.padle, mushroom)) {
+        this.mushrroms = this.mushrroms.toSpliced(i, 1);
+        this.lives.push(
+          new Heart(
+            canvaWidth - this.lives.length * 25 - 10,
+            canvasHeight - 20,
+          ),
+        );
+        playSoundEffect("./newLive.mp3", true);
+      }
+    });
     if (
       boxOverlap(this.ball, this.leftWall) ||
       boxOverlap(this.ball, this.rightWall)
@@ -345,6 +385,11 @@ class Game {
       this.pause();
       this.ball.setAnimation("lose");
     }
+    this.mushrroms.forEach((mushroom, i) => {
+      if (boxOverlap(this.downWall, mushroom)) {
+        this.mushrroms = this.mushrroms.toSpliced(i, 1);
+      }
+    });
     let filterval = null;
     this.bricks.forEach((brick, i) => {
       if (boxOverlap(this.ball, brick)) {
